@@ -5,6 +5,7 @@ import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
 
 class Quiz extends React.Component {
   state = {
+    results: {},
     activeQuestion: 0,
     isFinished: false,
     answerState: null,
@@ -16,7 +17,7 @@ class Quiz extends React.Component {
         answers: [
           { text: "Черный", id: 1 },
           { text: "Синий", id: 2 },
-          { text: "ВКрасный", id: 3 },
+          { text: "Красный", id: 3 },
           { text: "Зеленый", id: 4 },
         ],
       },
@@ -43,10 +44,15 @@ class Quiz extends React.Component {
     }
 
     const question = this.state.quiz[this.state.activeQuestion];
+    const results = this.state.results;
 
     if (question.rightAnswer === answerId) {
+      if (!results[question.id]) {
+        results[question.id] = "success";
+      }
       this.setState({
         answerState: { [answerId]: "success" },
+        results,
       });
 
       const timer = window.setTimeout(() => {
@@ -64,8 +70,10 @@ class Quiz extends React.Component {
         window.clearTimeout(timer);
       }, 1000);
     } else {
+      results[question.id] = "error";
       this.setState({
         answerState: { [answerId]: "error" },
+        results,
       });
     }
   };
@@ -74,6 +82,15 @@ class Quiz extends React.Component {
     return this.state.activeQuestion + 1 === this.state.quiz.length;
   }
 
+  retryHandler = () => {
+    this.setState({
+      activeQuestion: 0,
+      isFinished: false,
+      answerState: null,
+      results: {},
+    });
+  };
+
   render() {
     return (
       <div className={classes.Quiz}>
@@ -81,7 +98,11 @@ class Quiz extends React.Component {
           <h1>Ответьте на все вопросы</h1>
 
           {this.state.isFinished ? (
-            <FinishedQuiz />
+            <FinishedQuiz
+              results={this.state.results}
+              quiz={this.state.quiz}
+              onRetry={this.retryHandler}
+            />
           ) : (
             <ActiveQuiz
               answers={this.state.quiz[this.state.activeQuestion].answers}

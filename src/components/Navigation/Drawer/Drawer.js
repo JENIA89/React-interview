@@ -28,12 +28,13 @@ class Drawer extends React.Component {
     if (!this.props.isOpen) {
       cls.push(classes.close);
     }
-
-    const links = [{ to: "/", label: "Список", exact: true }];
+    //{ to: "/", label: "Список", exact: true }
+    const links = [];
 
     if (this.props.isAuth) {
-      links.push({ to: "/quiz-creator", label: "Создать тест", exact: false });
+      // links.push({ to: "/quiz-creator", label: "Создать тест", exact: false });
       links.push({ to: "/logout", label: "Выйти", exact: false });
+      links.push({ to: "/", label: "Список", exact: true });
     } else {
       links.push({ to: "/auth", label: "Авторизация", exact: false });
     }

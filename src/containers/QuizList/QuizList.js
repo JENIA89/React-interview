@@ -24,7 +24,7 @@ class QuizList extends React.Component {
     return (
       <div className={classes.QuizList}>
         <div>
-          <h1>Quiz List</h1>
+          <h1>React interview</h1>
           {this.props.loading && this.props.quizes.length !== 0 ? (
             <Loader />
           ) : (

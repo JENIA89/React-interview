@@ -1,10 +1,12 @@
+import React, { Component } from "react";
 import classes from "./Drawer.module.css";
-import React from "react";
-import Backdrop from "../../UI/Backdrop/Backdrop";
 import { NavLink } from "react-router-dom";
+import Backdrop from "../../UI/Backdrop/Backdrop";
 
-class Drawer extends React.Component {
-  clickHandler = () => this.props.onClose();
+class Drawer extends Component {
+  clickHandler = () => {
+    this.props.onClose();
+  };
 
   renderLinks(links) {
     return links.map((link, index) => {
@@ -25,19 +27,22 @@ class Drawer extends React.Component {
 
   render() {
     const cls = [classes.Drawer];
+
     if (!this.props.isOpen) {
       cls.push(classes.close);
     }
-    //{ to: "/", label: "Список", exact: true }
-    const links = [];
 
-    if (this.props.isAuth) {
-      // links.push({ to: "/quiz-creator", label: "Создать тест", exact: false });
+    const links = [{ to: "/", label: "Список", exact: true }];
+
+    console.log("AUth", this.props.isAuthenticated);
+
+    if (this.props.isAuthenticated) {
+      links.push({ to: "/quiz-creator", label: "Создать тест", exact: false });
       links.push({ to: "/logout", label: "Выйти", exact: false });
-      links.push({ to: "/", label: "Список", exact: true });
     } else {
       links.push({ to: "/auth", label: "Авторизация", exact: false });
     }
+
     return (
       <React.Fragment>
         <nav className={cls.join(" ")}>

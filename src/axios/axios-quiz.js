@@ -1,5 +1,5 @@
-import Axios from "axios";
+import axios from "axios";
 
-export default Axios.create({
+export default axios.create({
   baseURL: "https://react-interview-ddd91-default-rtdb.firebaseio.com/",
 });

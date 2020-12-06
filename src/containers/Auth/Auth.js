@@ -1,12 +1,12 @@
+import React, { Component } from "react";
 import classes from "./Auth.module.css";
 import Button from "../../components/UI/Button/Button";
-import React from "react";
 import Input from "../../components/UI/Input/Input";
 import is from "is_js";
 import { connect } from "react-redux";
 import { auth } from "../../store/actions/auth";
 
-class Auth extends React.Component {
+class Auth extends Component {
   state = {
     isFormValid: false,
     formControls: {

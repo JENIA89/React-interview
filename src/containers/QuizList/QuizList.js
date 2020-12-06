@@ -1,11 +1,11 @@
+import React, { Component } from "react";
 import classes from "./QuizList.module.css";
-import React from "react";
 import { NavLink } from "react-router-dom";
 import Loader from "../../components/UI/Loader/Loader";
 import { connect } from "react-redux";
 import { fetchQuizes } from "../../store/actions/quiz";
 
-class QuizList extends React.Component {
+class QuizList extends Component {
   renderQuizes() {
     return this.props.quizes.map((quiz) => {
       return (
@@ -24,7 +24,8 @@ class QuizList extends React.Component {
     return (
       <div className={classes.QuizList}>
         <div>
-          <h1>React interview</h1>
+          <h1>Список тестов</h1>
+
           {this.props.loading && this.props.quizes.length !== 0 ? (
             <Loader />
           ) : (

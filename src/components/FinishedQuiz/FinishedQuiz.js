@@ -1,5 +1,5 @@
-import classes from "./FinishedQuiz.module.css";
 import React from "react";
+import classes from "./FinishedQuiz.module.css";
 import Button from "../UI/Button/Button";
 import { Link } from "react-router-dom";
 
@@ -8,8 +8,10 @@ const FinishedQuiz = (props) => {
     if (props.results[key] === "success") {
       total++;
     }
+
     return total;
   }, 0);
+
   return (
     <div className={classes.FinishedQuiz}>
       <ul>
@@ -29,9 +31,11 @@ const FinishedQuiz = (props) => {
           );
         })}
       </ul>
+
       <p>
         Правильно {successCount} из {props.quiz.length}
       </p>
+
       <div>
         <Button onClick={props.onRetry} type="primary">
           Повторить
